@@ -1,0 +1,30 @@
+---
+apiVersion: training.eduk8s.io/v1alpha2
+kind: Workshop
+metadata:
+  name: ckad-practice-state-persistence
+spec:
+  title: CKAD Practice - State Persistence
+  description: A port of the State Persistence section of Liptan Biswas' CKAD practice challenge
+  vendor: kube.academy
+  difficulty: beginner
+  duration: 20m
+  url: https://github.com/kube-academy/lab-ckad-state-persistence
+  content:
+    files: github.com/kube-academy/lab-ckad-state-persistence
+  session:
+    namespaces:
+      security:
+        policy: anyuid
+      budget: medium
+      secondary:
+      - name: $(session_namespace)-apps
+        budget: small
+    applications:
+      terminal:
+        enabled: true
+        layout: default
+      editor:
+        enabled: true
+      examiner:
+        enabled: true

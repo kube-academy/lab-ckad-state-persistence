@@ -1,0 +1,35 @@
+#!/usr/bin/python3
+
+import subprocess
+
+class bcolors:
+    OKGREEN = '\033[92m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+
+
+def check_cmd(command, test):
+    s = subprocess.run(command, shell=True,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    if s.returncode == 0:
+        print(test + f" {bcolors.OKGREEN}Passed{bcolors.ENDC}")
+    else:
+        print(test + f"{bcolors.FAIL} Failed{bcolors.ENDC}")
+
+
+print("\nQuestion 1:")
+check_cmd("kubectl get pod vader -o jsonpath='{.spec.containers[0].image}' | grep -q -w 'nginx'", "Pod vader is created with correct image?")
+check_cmd("kubectl get pod vader -o jsonpath='{.spec.containers[0].volumeMounts[?(@.name==\"vader-vol\")].mountPath}' | grep -q -w '/var/www/html'", "Volume is mounted at correct path?")
+
+print("\nQuestion 2:")
+check_cmd("kubectl get po dooku -o jsonpath='{.spec.containers[0].volumeMounts[?(@.name==\"dooku-logs\")].mountPath}' | grep -q -w '/var/log/dooku'", "Volume dooku-logs is mounted correctly?")
+check_cmd("kubectl get po dooku -o jsonpath='{.spec.containers[1].volumeMounts[?(@.name==\"dooku-logs\")].mountPath}' | grep -q -w '/var/log/dooku'", "Volume dooku-logs is mounted correctly?")
+# can't do hostpath
+#check_cmd("kubectl get po dooku -o jsonpath='{.spec.volumes[?(@.name==\"dooku-logs\")].hostPath.path}' | grep -q -w '/data/dooku'", "Volume dooku-logs uses hostpath?")
+# so..
+check_cmd("kubectl get po dooku -o jsonpath='{.spec.volumes[?(@.name==\"dooku-logs\")].emptyDir}' | grep -q -w '{}'", "Volume dooku-logs uses emptyDir?")
+check_cmd("kubectl get po dooku -o jsonpath='{.status.phase}' | grep -q -w 'Running'", "Pod is running?")
+
+print("\nQuestion 3:")
+check_cmd("kubectl exec my-web-server -it -- cat /etc/app-data/city | grep -q -w Paris", "Is the configmap mounted at the right path?")
+check_cmd("kubectl exec my-web-server -it -- cat /etc/app-data/pastry | grep -q -w \"Baba au rhum\"", "Does the configmap include both literals?")
