@@ -1,5 +1,5 @@
 
-1. Create a ConfigMap named `my-data` with these two sets of key-value pairs: `city: Paris`, and `pastry: Baba au rhum`.  Create a Pod named `my-web-server` using the image `bitnami/nginx` that mounts the ConfigMap as a volume at `/etc/app-data` (the volume name is of your choosing).
+1. Create a ConfigMap named ``my-data``{{copy}} with these two sets of key-value pairs: ``city: Paris``{{copy}}, and ``pastry: Baba au rhum``{{copy}}.  Create a Pod named ``my-web-server``{{copy}} using the image ``bitnami/nginx``{{copy}} that mounts the ConfigMap as a volume at ``/etc/app-data``{{copy}} (the volume name is of your choosing).
 
     ```examiner:execute-test
     name: vol-pod-cm

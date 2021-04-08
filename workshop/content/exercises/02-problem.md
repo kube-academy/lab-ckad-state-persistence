@@ -1,6 +1,6 @@
 
-1. Create a pod `dooku` with two containers using the images `bitnami/redis` and `bitnami/nginx`.
-   Create an `emptyDir` scratch volume named `dooku-logs` mounted at `/var/log/dooku` in both containers.
+1. Create a pod ``dooku``{{copy}} with two containers using the images ``bitnami/redis``{{copy}} and ``bitnami/nginx``{{copy}}.
+   Create an ``emptyDir``{{copy}} scratch volume named ``dooku-logs``{{copy}} mounted at ``/var/log/dooku``{{copy}} in both containers.
 
     ```examiner:execute-test
     name: vol-pod-dooku

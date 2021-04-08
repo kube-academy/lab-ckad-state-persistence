@@ -1,5 +1,5 @@
 
-1. Create a pod named `vader` with image `bitnami/nginx`. Mount a volume named `vader-vol` at `/var/www/html`, which should live as long as pod lives.
+1. Create a Pod named ``vader``{{copy}} with image ``bitnami/nginx``{{copy}}. Mount a volume named ``vader-vol``{{copy}} at ``/var/www/html``{{copy}}, which should live as long as Pod lives.
 
     ```examiner:execute-test
     name: vol-pod-vader
